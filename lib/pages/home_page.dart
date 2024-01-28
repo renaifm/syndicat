@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,188 +12,115 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.white, // Set the overall background color to white
-
-      body: Column(
-        children: [
-          // Upper Brown Background Widget with Curved Bottom
-          UpperBackgroundWidget(),
-
-          // Lower White Background Widget
-          LowerBackgroundWidget(),
-        ],
+      backgroundColor: Colors.brown.shade400,
+      appBar: AppBar(
+        title: Text(
+          'Halo User',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-    );
-  }
-}
-
-class UpperBackgroundWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: BottomCurveClipper(),
-      child: Container(
-        color: Colors.brown[400],
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Greeting Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Text Halo
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Halo User !',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  ),
-                  // Notification
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.orange[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: EdgeInsets.all(12),
-                    child: Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
+              Image.asset(
+                'assets/images/syndicat-logo.png',
+                width: 200,
+                height: 400,
               ),
-
-              SizedBox(
-                height: 20,
+              Text(
+                'Status',
+                style: TextStyle(color: Colors.white),
               ),
-
-              // Cat Image and Icons Row
+              SizedBox(height: 20), // Jarak antara foto dan ikon/tombol
+              Container(
+                width: 250,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Icon Keterisian
+                    _buildStatusColumn(Icons.local_dining, '50%'),
+                    SizedBox(width: 20),
+                    // Icon Suhu Kucing
+                    _buildStatusColumn(Icons.thermostat_outlined, '23°C'),
+                    SizedBox(width: 20),
+                    // Icon Berat Kucing
+                    _buildStatusColumn(Icons.fitness_center, '15Kg'),
+                  ],
+                ),
+              ),
+              SizedBox(height: 50), // Jarak antara ikon dan tombol
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Kucing Image
-                  Image.asset(
-                    'assets/images/kucing.png', // Ganti dengan path gambar kucing Anda
-                    width: 120, // Sesuaikan ukuran gambar kucing
-                    height: 120,
-                  ),
-
+                  // Tombol Feed
+                  _buildActionButton(Icons.pets, 'Feed'),
                   SizedBox(width: 20),
-
-                  // Icons Row with Separators
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Keterisian Pakan Icon
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.local_dining,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            '100%',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Separator
-                      SizedBox(width: 20),
-
-                      // Suhu Kucing Icon
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.thermostat_outlined,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            '70 °C', // Ubah dari "70 Derajat" menjadi "70 °C"
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Separator
-                      SizedBox(width: 20),
-
-                      // Berat Badan Icon
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.fitness_center,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            '15 kg',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  // Tombol Health
+                  _buildActionButton(Icons.favorite, 'Health'),
                 ],
               ),
+              SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),
       ),
     );
   }
-}
 
-class LowerBackgroundWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Add content for the lower white background here
-        ],
-      ),
+  Column _buildStatusColumn(IconData icon, String text) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          color: Colors.brown, // Warna ikon coklat
+          size: 30,
+        ),
+        SizedBox(height: 8),
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.brown,
+          ),
+        ),
+      ],
     );
   }
-}
 
-class BottomCurveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(0, size.height - 50); // Start at the top-left
-    path.quadraticBezierTo(size.width / 2, size.height, size.width,
-        size.height - 50); // Define a quadratic Bézier curve for the bottom
-    path.lineTo(size.width, 0); // Line back to the top-right
-    return path;
+  Column _buildActionButton(IconData icon, String label) {
+    return Column(
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.white, // Warna background button putih
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.brown, // Warna ikon coklat
+            size: 30,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
   }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

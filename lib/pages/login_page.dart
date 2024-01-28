@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:syndicat/pages/home_page.dart';
+import 'package:get/get.dart';
+import 'package:syndicat/routes/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -139,10 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                       duration: Duration(milliseconds: 1900),
                       child: MaterialButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          Get.offAndToNamed(AppPage.getNavBar());
                         },
                         color: Color.fromRGBO(49, 39, 79, 1),
                         shape: RoundedRectangleBorder(
