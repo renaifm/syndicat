@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syndicat/pages/home_page.dart';
 import 'package:syndicat/pages/login_page.dart';
 
 void main() {
