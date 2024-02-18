@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:syndicat/routes/routes.dart';
+import 'register_page.dart'; // Impor halaman registrasi
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -142,9 +143,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Tambahkan navigasi ke halaman pendaftaran di sini
-                        // Contoh:
-                        // Get.to(RegisterPage());
+                        // Navigasi ke halaman registrasi saat teks "Register Now" ditekan
+                        Get.to(RegisterPage());
                       },
                       child: Text(
                         'Register Now',
