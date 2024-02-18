@@ -52,6 +52,8 @@ dependencies:
   get: ^4.6.1
 
   fl_chart: ^0.40.0 
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
 
 
 dev_dependencies:
